@@ -1,0 +1,9 @@
+bindPort = 7000
+quicBindPort = 7000
+vhostHTTPPort = 8000
+
+webServer.addr = "localhost"
+webServer.port = 7500
+# dashboard's username and password are both optional
+#webServer.user = "admin"
+#webServer.password = ""

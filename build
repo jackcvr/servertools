@@ -1,0 +1,5 @@
+#!/bin/sh
+
+PREFIX=jackcvr
+
+docker build -t $PREFIX/$1 ./$1 && docker push $PREFIX/$1
