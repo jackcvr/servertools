@@ -1,0 +1,6 @@
+#!/bin/sh
+
+LINK=$1; shift
+REMOTE_ADDR=$1; shift
+
+exec socat $@ pty,link=$LINK,raw,echo=0,b115200 tcp:$REMOTE_ADDR

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+BIND_ADDR=$1; shift
+REMOTE_ADDR=$1; shift
+
+exec socat $@ tcp-listen:$BIND_ADDR,fork,reuseaddr tcp:$REMOTE_ADDR
