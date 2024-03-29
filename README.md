@@ -8,23 +8,32 @@ services:
     network_mode: host
     volumes:
       - ./frp/frps.toml:/frp/frps.toml:ro
-    command: [frps, -c, frps.toml]
     restart: always
+    command: [frps, -c, frps.toml]
 
   tcp-proxy:
     image: jackcvr/tcp-proxy:latest
     network_mode: host
+    restart: always
     environment:
       BIND_PORT: 8000
       REMOTE_HOST: www.google.com
       REMOTE_PORT: 80
-    restart: always
 
   endlessh:
     image: jackcvr/endlessh:latest
     network_mode: host
     volumes:
       - ./endlessh/endlessh.conf:/etc/endlessh.conf:ro
-    command: [-f, /etc/endlessh.conf]
     restart: always
+    command: [-f, /etc/endlessh.conf]
+
+  socat:
+    image: jackcvr/socat:latest
+    network_mode: host
+    volumes:
+      - /dev:/dev
+    restart: always
+    command: [pty-tcp-serve, /dev/vpty0, "9000", -d, -d]
+    # command: [tcp-proxy, "9000", "google.com:80", -d, -d]
 ```
